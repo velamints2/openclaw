@@ -266,8 +266,7 @@ export function resolveBrowserConfig(
 
   // ensureDefaultProfile() guarantees the openclaw profile always exists.
   // Use the constant directly as the single source of truth (#31907).
-  const defaultProfile =
-    defaultProfileFromConfig ?? DEFAULT_BROWSER_DEFAULT_PROFILE_NAME;
+  const defaultProfile = defaultProfileFromConfig ?? DEFAULT_BROWSER_DEFAULT_PROFILE_NAME;
 
   const extraArgs = Array.isArray(cfg?.extraArgs)
     ? cfg.extraArgs.filter((a): a is string => typeof a === "string" && a.trim().length > 0)
