@@ -62,6 +62,10 @@ export async function handlePortError(
             "It looks like another OpenClaw instance is already running. Stop it or pick a different port.",
           ),
         );
+        // Exit cleanly so process supervisors (launchd KeepAlive,
+        // systemd Restart=always) do NOT respawn us into an
+        // infinite crash-loop.  The healthy instance owns the port.
+        runtime.exit(0);
       }
     }
     runtime.error(
