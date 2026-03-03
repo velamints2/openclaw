@@ -63,9 +63,11 @@ export async function handlePortError(
           ),
         );
         // Exit cleanly so process supervisors (launchd KeepAlive,
-        // systemd Restart=always) do NOT respawn us into an
-        // infinite crash-loop.  The healthy instance owns the port.
+        // systemd with Restart=on-failure) do NOT respawn us into
+        // an infinite crash-loop.  The healthy instance owns the
+        // port.  Note: systemd Restart=always will still respawn.
         runtime.exit(0);
+        return undefined as never;
       }
     }
     runtime.error(
